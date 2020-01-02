@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.gameIsOn)
         {
-            //woodInCamina.text = $"{GameManager.Instance.GetKaminaCurrentCapacity()}";
+            woodInCamina.text = $"{GameManager.Instance.GetKaminaCurrentCapacity()}";
             temperature.text = $"Temperature: {Mathf.RoundToInt(GameManager.Instance.GetTemperature())}°C";
             virkeys.text = $"virkeys: {Mathf.RoundToInt(GameManager.Instance.GetVirkeys())}%";
 

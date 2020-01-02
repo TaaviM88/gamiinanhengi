@@ -18,4 +18,9 @@ public class Spurdo : MonoBehaviour
     {
         UIManager.Instance.KaadaActive();
     }
+
+    public void PlayPouringSFX()
+    {
+        AudioManager.Instance.PlaySFX(2);
+    }
 }

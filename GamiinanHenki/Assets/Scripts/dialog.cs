@@ -19,7 +19,7 @@ public class dialog : MonoBehaviour
                 UIManager.Instance.AlogasSanoo(alogasDialog[alogasIndex]);
                 alogasIndex++;
                 
-                if(alogasIndex ==3)
+                if(alogasIndex ==2)
                 {
                     GameManager.Instance.ShowToivomusVesi();
                 }
