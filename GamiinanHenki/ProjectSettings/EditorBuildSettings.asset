@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: baad0a8d49353604f84edd22b646753b
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/ToivomusEndScreen.unity
+    guid: 5e2e0b229dd22534b8ee1676490c52f0
+  - enabled: 1
+    path: Assets/Scenes/GoodEndScreen.unity
+    guid: f119bf614e6110a4f83f971b73133c0a
+  - enabled: 1
+    path: Assets/Scenes/BurnEndScreen.unity
+    guid: b23165f35f08c1346aefe7bb51944c1f
+  - enabled: 1
+    path: Assets/Scenes/FreezeEndScreen.unity
+    guid: 5ddfe4a9c8f58084fb1b0a6f2dca5d76
+  m_configObjects: {}
