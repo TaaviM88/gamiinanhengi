@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject dissit, gaminanHenki, firesound, toivomusvesi, headObject, spurdo;
     public Sprite benisHead;
     Sprite originalheadSprite;
-    public ParticleSystem zzParticle;
+    public ParticleSystem zzParticle, tentOnFire,snowPS;
     [SerializeField] float temperature = 20;
     [SerializeField] float timer;
     [SerializeField] int woodInKamina = 10;
@@ -55,6 +55,16 @@ public class GameManager : MonoBehaviour
         if (toivomusvesi.activeInHierarchy)
         {
             toivomusvesi.SetActive(false);
+        }
+
+        if(tentOnFire.gameObject.activeInHierarchy)
+        {
+            tentOnFire.gameObject.SetActive(false);
+        }
+
+        if(snowPS.gameObject.activeInHierarchy)
+        {
+            snowPS.gameObject.SetActive(false);
         }
         currentKaminaCapacity = woodInKamina;
         virkeysasteAlogalla = maxVirkeysasteAlogalla;
@@ -146,6 +156,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOver()
     {
         endTimerOn = true;
+        UIManager.Instance.ToggleButtons(false);
         if (!goodEnd)
         {
             AudioManager.Instance.PlayBGM(1);
@@ -170,6 +181,7 @@ public class GameManager : MonoBehaviour
         {
             // UIManager.Instance.AlogasSanoo("Voi VIDDU KAIKKI PALELTUIVAT :DDDD");
             DialogUpdated("Voi VIDDU KAIKKI PALELTUIVAT: DDDD", null);
+            snowPS.gameObject.SetActive(true);
             gameIsOn = false;
             FreezeEnd = true;
             // Debug.Log("GameOver! KAIKKI PALELTUIVAT");
@@ -317,6 +329,8 @@ public class GameManager : MonoBehaviour
                     //UIManager.Instance.AlogasSanoo"Poldin iddeäni mudda olen vähän virgeämpi :D"
                     DialogUpdated("Deltta sytty palamaan kun otit vahingossa palavan buun pois EBIN :-D GG", null);
                     // Debug.Log("Teltta sytty palamaan kun otit vahingossa palavan puun pois GG");
+
+                    tentOnFire.gameObject.SetActive(true);
                     burnEnd = true;
                     gameIsOn = false;
                 }

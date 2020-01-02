@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text alogasText, gaminanHenkiText, woodInCamina, temperature, time, virkeys;
     public Image thermometerBlock;
     public Button ESButton, dialogButton;
+    public GameObject buttonParentObj;
     bool initialDialog = false;
     Color orginalColor;
     // Start is called before the first frame update
@@ -59,7 +60,6 @@ public class UIManager : MonoBehaviour
                 thermometerBlock.rectTransform.localScale += new Vector3(0, f, 0);
             }
 
-
             if (GameManager.Instance.GetTemperature() >= 0 && thermometerBlock.color != orginalColor)
             {
                 thermometerBlock.color = Color.Lerp(thermometerBlock.color, orginalColor, 1);
@@ -83,6 +83,11 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.gameIsOn)
             gaminanHenkiText.text = t;
+    }
+
+    public void ToggleButtons(bool b)
+    {
+        buttonParentObj.SetActive(b);
     }
 
     #region Button Methods
