@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         while (woodInKamina > 0 && isBurningWood)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
             woodInKamina--;
             ChangeTemperature(1);
             isBurningWood = false;
@@ -409,6 +409,11 @@ public class GameManager : MonoBehaviour
         spurdo.GetComponent<Animator>().SetTrigger("kaada");
         toivomusVesiEnd = true;
         gameIsOn = false;
+
+    }
+
+    public void SetTentFire()
+    {
         tentOnFire.gameObject.SetActive(true);
         spurdoParticles.gameObject.SetActive(true);
     }

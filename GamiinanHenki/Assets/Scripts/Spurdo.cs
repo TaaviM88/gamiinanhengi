@@ -22,5 +22,11 @@ public class Spurdo : MonoBehaviour
     public void PlayPouringSFX()
     {
         AudioManager.Instance.PlaySFX(2);
+        
+    }
+
+    public void SetTentOnFire()
+    {
+        GameManager.Instance.SetTentFire();
     }
 }
