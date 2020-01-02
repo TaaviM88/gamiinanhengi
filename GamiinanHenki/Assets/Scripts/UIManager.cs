@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public TMP_Text alogasText, gaminanHenkiText, woodInCamina, temperature, time, virkeys;
     public Image thermometerBlock;
-    public Button ESButton, dialogButton;
+    public Button ESButton, dialogButton,kaadabutton;
     public GameObject buttonParentObj;
     bool initialDialog = false;
     Color orginalColor;
@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
         }
         orginalColor = thermometerBlock.color;
         dialogButton.gameObject.SetActive(false);
+        kaadabutton.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,9 +34,9 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.gameIsOn)
         {
-            woodInCamina.text = $"{GameManager.Instance.GetKaminaCurrentCapacity()}";
+            //woodInCamina.text = $"{GameManager.Instance.GetKaminaCurrentCapacity()}";
             temperature.text = $"Temperature: {Mathf.RoundToInt(GameManager.Instance.GetTemperature())}°C";
-            virkeys.text = $"virkeys: {Mathf.RoundToInt(GameManager.Instance.GetVirkeys())}";
+            virkeys.text = $"virkeys: {Mathf.RoundToInt(GameManager.Instance.GetVirkeys())}%";
 
             if (GameManager.Instance.GetESCooldown() == true)
             {
@@ -47,6 +48,7 @@ public class UIManager : MonoBehaviour
             }
 
         }
+
 
     }
 
@@ -123,7 +125,7 @@ public class UIManager : MonoBehaviour
         {
             GameManager.Instance.PlayDrinkAnimation();
             GameManager.Instance.StartESCooldown();
-            GameManager.Instance.ChangeVirkeys(10);
+            GameManager.Instance.ChangeVirkeys(15);
             //AudioManager.Instance.PlaySFX(0);
         }
             
@@ -131,6 +133,8 @@ public class UIManager : MonoBehaviour
 
     public void ToivomusWaterToKamina()
     {
+        GameManager.Instance.CanUseToivomusVesi();
+      /*
       if(GameManager.Instance.GetVirkeys() < 30 && GameManager.Instance.GetTemperature() > 60 && GameManager.Instance.gameIsOn)
         {
 
@@ -144,6 +148,7 @@ public class UIManager : MonoBehaviour
         {
             AlogasSanoo("En ole vielä niin väsynyd, eddä dädä lisäidin :D! Koko deldda räjähdää! EBIN :D");
         }
+        */
     }
 
     public void SetActiveDialogButton()
@@ -156,5 +161,11 @@ public class UIManager : MonoBehaviour
         //Application.Quit();
         GameManager.Instance.GoMainMenu();
     }
+
+    public void KaadaActive()
+    {
+        kaadabutton.gameObject.SetActive(true);
+    }
+
     #endregion
 }

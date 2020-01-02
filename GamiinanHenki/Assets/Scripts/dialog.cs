@@ -11,30 +11,17 @@ public class dialog : MonoBehaviour
     int alogasIndex = 0;
     bool initialStart = true;
 
-    private void Start()
-    {
-
-    }
-
     public void GoNextLineHengi()
     {
-        if (initialStart)
-        {
-            UIManager.Instance.GaminanHenkiSanoo(hengiDialog[hengIndex]);
-            UIManager.Instance.AlogasSanoo(alogasDialog[alogasIndex]);
-            initialStart = false;
-
-        }
-        else
-        {
+       
             if(alogasDialog.Length > alogasIndex)
             {
                 UIManager.Instance.AlogasSanoo(alogasDialog[alogasIndex]);
                 alogasIndex++;
                 
-                if(alogasIndex ==4)
+                if(alogasIndex ==3)
                 {
-                    GameManager.Instance.CanUseToivomusVesi();
+                    GameManager.Instance.ShowToivomusVesi();
                 }
             }
 
@@ -44,12 +31,7 @@ public class dialog : MonoBehaviour
                 hengIndex++;
                 
             }
-            else
-            {
-                
-            }
-            
-        }
+           
 
     }
 }

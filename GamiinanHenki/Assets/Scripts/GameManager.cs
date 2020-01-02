@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject dissit, gaminanHenki, firesound, toivomusvesi, headObject, spurdo;
     public Sprite benisHead;
     Sprite originalheadSprite;
-    public ParticleSystem zzParticle, tentOnFire,snowPS;
+    public ParticleSystem zzParticle, tentOnFire,snowPS, spurdoParticles;
     [SerializeField] float temperature = 20;
     [SerializeField] float timer;
     [SerializeField] int woodInKamina = 10;
@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
         {
             snowPS.gameObject.SetActive(false);
         }
+
+        if(spurdoParticles.gameObject.activeInHierarchy)
+        {
+            spurdoParticles.gameObject.SetActive(false);
+        }
         currentKaminaCapacity = woodInKamina;
         virkeysasteAlogalla = maxVirkeysasteAlogalla;
         originalheadSprite = headObject.GetComponent<SpriteRenderer>().sprite;
@@ -118,7 +123,7 @@ public class GameManager : MonoBehaviour
         while (temperature > -20 && woodInKamina <= 0 && isLoweringTemperature)
         {
             yield return new WaitForSeconds(1);
-            ChangeTemperature(-1);
+            ChangeTemperature(-3);
 
             isLoweringTemperature = false;
             kaminanValo.DecreaseLigthIntensity(0.1f);
@@ -192,12 +197,13 @@ public class GameManager : MonoBehaviour
             DialogUpdated("Voi viddu mehdän guollaan lämpöön däällä", null);
         }
 
-        if (temperature > 80)
+        if (temperature > 85)
         {
             gameIsOn = false;
             burnEnd = true;
             //UIManager.Instance.AlogasSanoo("Voi viddu! ME kuollaa kuumuudeen :DDDD");
             DialogUpdated("Voi viddu! ME kuollaa kuumuudeen :DDDD", null);
+            tentOnFire.gameObject.SetActive(true);
             //Debug.Log("KAIKKI KÄRISTYIVÄT");
         }
     }
@@ -208,7 +214,6 @@ public class GameManager : MonoBehaviour
     public void PlayWoodInKaminaAnimation()
     {
         spurdo.GetComponent<Animator>().SetTrigger("woodInKamina");
-        Debug.Log("jep");
     }
 
     public void PlayPoisPuuKaminasta()
@@ -230,6 +235,11 @@ public class GameManager : MonoBehaviour
         {
             ChangeVirkeys(-2);
         }
+
+        if(temperature >= 60)
+        {
+            ChangeVirkeys(-3);
+        }
     }
 
     //if spurdo is tired show tissit else do nothing
@@ -249,7 +259,7 @@ public class GameManager : MonoBehaviour
             ToggleDissit(true);
         }
 
-        if (virkeysasteAlogalla < maxVirkeysasteAlogalla/2 && temperature > 60 && virkeysasteAlogalla > 0)
+        if (virkeysasteAlogalla < maxVirkeysasteAlogalla/2 && temperature > 70 && virkeysasteAlogalla > 0)
         {
             // UIManager.Instance.GaminanHenkiSanoo("OLEN GAMIINAN HENGI :-D EBIN :-D");
             //UIManager.Instance.AlogasSanoo("VOI HELVETTI!");
@@ -383,18 +393,24 @@ public class GameManager : MonoBehaviour
         return canUseToivomusVesi;
     }
 
+    public void ShowToivomusVesi()
+    {
+        spurdo.GetComponent<Animator>().SetTrigger("showToivomusvesi");
+        canUseToivomusVesi = true;  
+    }
+
     public void CanUseToivomusVesi()
     {
         canUseToivomusVesi = true;
-        spurdo.GetComponent<Animator>().SetTrigger("showToivomusvesi");
-        //toivomusvesi.SetActive(true);
     }
 
     public void UseToivomusVetta()
     {
         spurdo.GetComponent<Animator>().SetTrigger("kaada");
-        goodEnd = true;
+        toivomusVesiEnd = true;
         gameIsOn = false;
+        tentOnFire.gameObject.SetActive(true);
+        spurdoParticles.gameObject.SetActive(true);
     }
 
     public void ToggleDissit(bool b)
